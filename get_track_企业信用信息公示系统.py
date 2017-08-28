@@ -167,10 +167,10 @@ class gsxt(object):
         new_t_lst=pst.process_time(t_series)
         new_t_lst_2=[]
         for timepoint in new_t_lst:
-            new_t_lst_2.append(timepoint*0.05)
+            new_t_lst_2.append(timepoint*0.001)
         #按下滑动块
         ActionChains(self.br).click_and_hold(on_element=element).perform()        
-        time.sleep(0.5)
+        time.sleep(0.3)
         
         for i in range(0,len(x_lst)):
             ActionChains(self.br).move_to_element_with_offset(
@@ -191,13 +191,16 @@ class gsxt(object):
 
 
     def run(self):
-        try:
-            for i in [u'招商银行']:            
-            	   self.hack_geetest(i)
-            	   time.sleep(1)
-            self.quit_webdriver()
-        except:
-            self.quit_webdriver()
+        
+        for i in [u'招商银行']:            
+        	   self.hack_geetest(i)
+        	   time.sleep(1)
+#        try:
+#            for i in [u'招商银行']:            
+#            	   self.hack_geetest(i)
+#            	   time.sleep(1)
+#        except:
+#            self.quit_webdriver()
         
 
 
@@ -213,11 +216,12 @@ class gsxt(object):
                 print('通过')
                 print(tsb)
                 time.sleep(1)
-#                soup = BeautifulSoup(self.br.page_source, 'html.parser')
-#                for sp in soup.find_all("a", attrs={"class":"search_list_item"}):
-#                    print(re.sub("\s+", "", sp.get_text().encode("utf-8")))
+                print('find content')
+                soup = BeautifulSoup(self.br.page_source, 'html.parser')
+                for sp in soup.find_all("a", attrs={"class":"search_list_item"}):
+                    print(re.sub(r"\s+", r"", sp.get_text().encode("utf-8")))
 #                     输出页面内容
-#                    print (sp.get_text())
+                    print (sp.get_text())
                 break
             
             elif '吃' in tsb:
@@ -243,6 +247,7 @@ class gsxt(object):
 
 
 if __name__ == "__main__":
+    gsxt("chrome").run()
     #print crack_picture("http://static.geetest.com/pictures/gt/fc064fc73/fc064fc73.jpg", "http://static.geetest.com/pictures/gt/fc064fc73/bg/7ca363b09.jpg").pictures_recover()
 #    for i in range(1,10):
 #        print('第'+str(i)+'次')
@@ -251,11 +256,12 @@ if __name__ == "__main__":
 #        except:
 #            print('exception')
 #            continue
-    for i in range(1,10):
-        print('第'+str(i)+'次')
-        try:
-            gsxt("phantomjs").run()
-        except:
-            print('exception')
-            continue
+
+#    for i in range(1,2):
+#        print('第'+str(i)+'次')
+#        try:
+#            gsxt("chrome").run()
+#        except:
+#            print('exception')
+#            continue
 
