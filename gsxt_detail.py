@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Aug  9 16:10:16 2017
+Created on Mon Aug 28 13:53:59 2017
 
 @author: liuxinyu
 """
 
-#-*-coding:utf-8-*-
+# -*- coding: utf-8 -*-
+
 import requests
 import re
 from functools import reduce
@@ -129,29 +130,6 @@ class gsxt(object):
         except:
             return re.findall('url\((.*?)\)', element.get_attribute('style'))[0].replace("webp", "jpg")
         
-        
-
-#    def get_random_track(L):
-#    #            L = 100 # 这两个值任意更改，也可以用sys.argv来设置
-#            n = 20
-#            lst = []
-#            j = L 
-#            k = L 
-#            for i in range(n-1): # 随机生成前面n-1个数
-#                while j > ( k - (n - i) ): # 防止随机数太大，让后面的数不够分
-#                    j = randint(-3, k)
-#                lst.append( j ) 
-#                k -= j
-#                j = k        
-#            lst.append( L - sum(lst) ) # 最后一个数字，用减法        
-#            print( lst, sum(lst))
-#            return lst
-#        
-#    def get_random_track2(self,L):
-##        base_x=list(range(1,L))
-#        base_x=list(np.ones(L,dtype=int))
-#        return base_x
-
 
     def emulate_track(self, tracks):
         element = self.br.find_element_by_class_name("gt_slider_knob")
