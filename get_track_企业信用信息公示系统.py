@@ -167,7 +167,7 @@ class gsxt(object):
         new_t_lst=pst.process_time(t_series)
         new_t_lst_2=[]
         for timepoint in new_t_lst:
-            new_t_lst_2.append(timepoint*0.2)
+            new_t_lst_2.append(timepoint*0.05)
         #按下滑动块
         ActionChains(self.br).click_and_hold(on_element=element).perform()        
         time.sleep(0.5)
@@ -181,7 +181,7 @@ class gsxt(object):
         
 
 #        time.sleep(0.05)
-        time.sleep(0.03)
+        time.sleep(0.05)
         ActionChains(self.br).release(on_element=element).perform()
         time.sleep(0.8)
         element = self.wait_for(By.CLASS_NAME, "gt_info_text")
@@ -211,13 +211,15 @@ class gsxt(object):
 #            print(tsb)
             if '通过' in tsb:
                 print('通过')
+                print(tsb)
                 time.sleep(1)
 #                soup = BeautifulSoup(self.br.page_source, 'html.parser')
 #                for sp in soup.find_all("a", attrs={"class":"search_list_item"}):
 #                    print(re.sub("\s+", "", sp.get_text().encode("utf-8")))
-                     #输出页面内容
+#                     输出页面内容
 #                    print (sp.get_text())
                 break
+            
             elif '吃' in tsb:
                 print('失败')
                 time.sleep(5)
@@ -234,7 +236,7 @@ class gsxt(object):
             dcap = dict(DesiredCapabilities.PHANTOMJS)
             dcap["phantomjs.page.settings.userAgent"] = (
             "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.98 Safari/537.36")
-            return webdriver.PhantomJS(desired_capabilities=dcap)
+            return webdriver.PhantomJS(executable_path='E:/Anaconda3/selenium/webdriver/phantomjs-2.1.1-windows/bin/phantomjs.exe',desired_capabilities=dcap)
 
         elif name.lower() == "chrome":
             return webdriver.Chrome()
@@ -242,14 +244,18 @@ class gsxt(object):
 
 if __name__ == "__main__":
     #print crack_picture("http://static.geetest.com/pictures/gt/fc064fc73/fc064fc73.jpg", "http://static.geetest.com/pictures/gt/fc064fc73/bg/7ca363b09.jpg").pictures_recover()
+#    for i in range(1,10):
+#        print('第'+str(i)+'次')
+#        try:
+#            gsxt("chrome").run()
+#        except:
+#            print('exception')
+#            continue
     for i in range(1,10):
         print('第'+str(i)+'次')
         try:
-            gsxt("chrome").run()
+            gsxt("phantomjs").run()
         except:
             print('exception')
             continue
-        
-            
-
 
